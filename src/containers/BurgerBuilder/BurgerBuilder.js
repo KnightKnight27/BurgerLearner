@@ -75,13 +75,12 @@ class BurgerBuilder extends Component{
                 }
             }
         }
-        axios.post('/orders.json',orderObject).then
-        (
-            this.setState({loading:false,purchasing:false})
-        ).
-        catch
-        (
-            this.setState({loading:false,purchasing:false})
+        axios.post('/orders.json',orderObject)
+        .then( response =>{
+            this.setState({loading:false,purchasing:false});
+            } )
+        .catch(
+         error=>{this.setState({loading:false,purchasing:false});}
         );
     };
     render(){
@@ -97,7 +96,6 @@ class BurgerBuilder extends Component{
         ingredients={this.state.ingredients}
         purchaseContinued={this.purchaseContinueHandler}
         purchaseCanceled={this.purchaseCancelHandler}/>;
-        
         if(this.state.loading){
             Order=<Spinner/>
         }
